@@ -1,0 +1,10 @@
+{
+  "name": "ci-practice-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "CI練習用の小さな静的Webサイト",
+  "devDependencies": {
+    "htmlhint": "^1.1.4"
+  }
+}
