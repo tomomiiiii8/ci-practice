@@ -18,7 +18,8 @@ jobs:
       - run:
           name: Run tests 
           # command: node --test --test-reporter=junit --test-reporter-destination=test-results/junit.xml tests/
-          command: node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results/junit.xml tests/
+          # command: node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results/junit.xml tests/
+          command: node --test --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=test-results/junit.xml tests/*.test.js
       - store_test_results:
           path: test-results
       - store_artifacts:
