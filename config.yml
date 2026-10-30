@@ -1,0 +1,45 @@
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: cimg/node:22.11
+    steps:
+      - checkout
+      - run: npm install
+      - run: npx htmlhint "site/**/*.html"
+
+  test:
+    docker:
+      - image: cimg/node:22.11
+    steps:
+      - checkout
+      - run: mkdir -p test-results
+      - run:
+          name: Run tests
+          command: node --test --test-reporter=junit --test-reporter-destination=test-results/junit.xml tests/
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: site
+          destination: site
+
+  publish:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - run: echo "公開したつもり(練習用)"
+
+workflows:
+  check-and-publish:
+    jobs:
+      - lint
+      - test
+      - hold:
+          type: approval
+          requires:
+            - lint
+            - test
+      - publish:
+          requires:
+            - hold
